@@ -1,8 +1,34 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-export default class PlantList extends Component {
+// export default class PlantList extends Component {
   // add state with a property called "plants" - initialize as an empty array
+
+
+  class PlantList extends React.Component {
+    constructor() {
+      // console.log("Constructor");
+      super();
+      this.state = {
+        
+        plants: [],
+        
+        
+      };
+    }
+  fetchPlants = () => {
+    console.log("fetching data")
+    axios
+      .get(`http://localhost:3333/plants`)
+      .then((res) => {
+        console.log(res);
+        console.log("changing state in fetch plants function")
+        this.setState({ plants: res.data});
+  
+      })
+      .catch((err) => console.log('plants',err));
+  };
+
 
   // when the component mounts:
   //   - fetch data from the server endpoint - http://localhost:3333/plants
@@ -37,3 +63,5 @@ export default class PlantList extends Component {
     );
   }
 }
+
+export default PlantList;
