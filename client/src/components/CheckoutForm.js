@@ -1,5 +1,25 @@
 import React, { useState } from "react";
-// import {useForms} from "../hooks/useForm";
+
+
+
+export const useCheckoutForm = (key, initialValue) =>{
+
+  const [storedValue, setStoredValue] = useState(()=> {
+      if (window.checkoutForm.getItem(key)){
+          return JSON.parse(window.checkoutForm.getItem(key));
+      }
+      window.checkoutForm.setItem(key, JSON.stringify(initialValue));
+      return initialValue
+  });
+
+  const setValue = (value) => {
+      setStoredValue(value);
+      window.checkoutForm.setItem(key, JSON.stringify(value));
+  };
+
+  return [storedValue, setValue]
+
+}
 
 const initialValue = {
   firstName: "",

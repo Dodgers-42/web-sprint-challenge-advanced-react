@@ -2,7 +2,7 @@
 
 
 import {useEffect} from "react";
-
+import {useForms} from "../hooks/useForm";
 
 const useForm = (key) => {
 
@@ -20,3 +20,4 @@ const useForm = (key) => {
 }
 
 export default useForm;
+
