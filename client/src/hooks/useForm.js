@@ -1,22 +1,17 @@
 // write your custom hook here to control your checkout form
 
 
-import {useEffect} from "react";
-import {useForms} from "../hooks/useForm";
+import { useState } from "react";
 
-const useForm = (key) => {
+const useForm = (initialValue) => {
 
-        const [Form, setForm] = useCheckoutForm(key, false);
+        const [Form, setForm] = useState(initialValue);
         
-        useEffect(()=>{
-            if (plant){
-                document.querySelector("item").classList.add("plant");
-            } else {
-                document.querySelector("item").classList.remove("plant");
-            }
-        }, [Form]);
+       const handleChanges = (e) => {
+    setForm({ ...Form, [e.target.name]: e.target.value });
+};
 
-        return [Form, setForm];
+        return [Form, handleChanges];
 }
 
 export default useForm;

@@ -1,25 +1,8 @@
 import React, { useState } from "react";
+import  useForm  from "../hooks/useForm"
 
 
 
-export const useCheckoutForm = (key, initialValue) =>{
-
-  const [storedValue, setStoredValue] = useState(()=> {
-      if (window.checkoutForm.getItem(key)){
-          return JSON.parse(window.checkoutForm.getItem(key));
-      }
-      window.checkoutForm.setItem(key, JSON.stringify(initialValue));
-      return initialValue
-  });
-
-  const setValue = (value) => {
-      setStoredValue(value);
-      window.checkoutForm.setItem(key, JSON.stringify(value));
-  };
-
-  return [storedValue, setValue]
-
-}
 
 const initialValue = {
   firstName: "",
@@ -36,12 +19,9 @@ const initialValue = {
 
 const CheckoutForm = (props) => {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [values, setValues] = useState(initialValue);
+  const [values, handleChanges] = useForm(initialValue);
 
-  const handleChanges = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-  };
-
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     setShowSuccessMessage(true);
