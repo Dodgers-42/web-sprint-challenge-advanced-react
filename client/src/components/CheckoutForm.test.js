@@ -25,7 +25,7 @@ const city = getByTestId(/city/i);
 //console.log(city.textContent);
 const state = getByTestId(/state/i);
 //console.log(state.textContent);
-const zipCode = getByTestId(/zipCode/i);
+const zip = getByTestId(/zip/i);
 //console.log(zipCode.textContent);
 
 // describe("submit", () => {
@@ -47,17 +47,17 @@ const zipCode = getByTestId(/zipCode/i);
                 fireEvent.change(city), {target: {value: "Over There City" }}
             })
             await act(async () => {
-                fireEvent.change(state), {target: {value: "successMessage" }}
+                fireEvent.change(state), {target: {value: "Cali" }}
             })
             await act(async () => {
-                fireEvent.change(zipCode), {target: {value: "successMessage" }}
+                fireEvent.change(zip), {target: {value: "12345" }}
             })
             await act(async () => {
                 fireEvent.click(getByText("Checkout"))
             })   
         
     
-
+            getByTestId('successMessage');
 
 
 });
