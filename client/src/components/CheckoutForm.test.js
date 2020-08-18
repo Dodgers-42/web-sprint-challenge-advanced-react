@@ -10,55 +10,74 @@ test("form header renders", () => {
 });
 
 
-test("form shows success message on submit with form details", () => {
+test("form shows success message on submit with form details", async () => {
 // // Arrange
-const { getByText } = render(<CheckoutForm />);
+const { getByText, getByLabelText, getByTestId } = render(<CheckoutForm />);
   
 // Act
 const firstName = getByTestId(/first/i);
-console.log(firstName.textContent);
-
-// Assert
-// expect(firstName.textContent).toEqual("Correct Amount letters");
-
-// // Act
+//console.log(firstName.textContent);
 const lastName = getByTestId(/last/i);
-console.log(lastName.textContent);
-
-// // Act
+//console.log(lastName.textContent);
 const address = getByTestId(/address/i);
-console.log(address.textContent);
-  
-// // Act
+//console.log(address.textContent);
 const city = getByTestId(/city/i);
-console.log(city.textContent);
-  
-// // Act
+//console.log(city.textContent);
 const state = getByTestId(/state/i);
-console.log(state.textContent);
-
-// // Act
+//console.log(state.textContent);
 const zipCode = getByTestId(/zipCode/i);
-console.log(zipCode.textContent);
+//console.log(zipCode.textContent);
+
+// describe("submit", () => {
+//     describe("shows sucessful message", () => {
+//         it('calls the onSummit function', async () => {
+            
+//             const {getByLabelText} = render(<CheckoutForm onSubmit={mockOnSubmit}/>)
+
+            await act(async () => {
+                fireEvent.change(firstName), {target: {value: "Kevin" }}
+            })
+            await act(async () => {
+                fireEvent.change(lastName), {target: {value: "Bing" }}
+            })
+            await act(async () => {
+                fireEvent.change(address), {target: {value: "123 That Place" }}
+            })
+            await act(async () => {
+                fireEvent.change(city), {target: {value: "Over There City" }}
+            })
+            await act(async () => {
+                fireEvent.change(state), {target: {value: "successMessage" }}
+            })
+            await act(async () => {
+                fireEvent.change(zipCode), {target: {value: "successMessage" }}
+            })
+            await act(async () => {
+                fireEvent.click(getByText("Checkout"))
+            })   
+        
+    
 
 
 
 });
 
-describe("submit", () => {
-    describe("shows sucessful message", () => {
-        it('calls the onSummit function', async () => {
-            const mockOnSubmit = jest.fn()
-            const {getByText, getByRole} = render(<CheckoutForm onSubmit={mockOnSubmit}/>)
+//test("renders a message", () => {
+ //  const {getByText, getByLableText} = render(<CheckoutForm />);
+ 
+ // getByText('')
+ // getByLableText('')
 
-            await act(async () => {
-                fireEvent.change(getByText("message"), {target: {value: "message" }})
-            })
-            await act(async () => {
-                fireEvent.click(getByRole("button"))
-            })
+//})
 
-            expect(mockOnSubmit).toHaveBeenCalled()
-        })
-    })
-})
+//test("renders a successful message", () => {
+ //  const {getByText, getByLableText} = render(<CheckOutForm />);
+
+ // const input = getByLableText('');
+ // fireEvent.change(input, { target: { value: "message"}});
+ // fireEvent.click(getByText("submit"));
+
+ // getByText("Update-Message");
+ // getByText('correct-submit');
+
+ //});
