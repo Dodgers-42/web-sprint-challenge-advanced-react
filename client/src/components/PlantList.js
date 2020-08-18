@@ -1,18 +1,47 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-export default class PlantList extends Component {
+// export default class PlantList extends Component {
   // add state with a property called "plants" - initialize as an empty array
 
+
+  class PlantList extends React.Component {
+    constructor() {
+      // console.log("Constructor");
+      super();
+      this.state = {
+        
+        plants: [],
+        
+        
+      };
+    }
+    componentDidMount() {
+
+  const fetchPlants = () => {
+    console.log("fetching data")
+    axios
+      .get(`http://localhost:3333/plants`)
+      .then((res) => {
+        console.log(res);
+        console.log("changing state in fetch plants function")
+        this.setState({ plants: res.data.plantsData});
+  
+      })
+      .catch((err) => console.log('plants',err));
+  };
+  fetchPlants()
+  }
   // when the component mounts:
   //   - fetch data from the server endpoint - http://localhost:3333/plants
   //   - set the returned plants array to this.state.plants
 
   /*********  DON'T CHANGE ANYTHING IN THE RENDER FUNCTION *********/
   render() {
+    console.log("hey", this.state.plants)
     return (
       <main className="plant-list">
-        {this.state?.plants?.map((plant) => (
+        {this.state.plants.map((plant) => (
           <div className="plant-card" key={plant.id}>
             <img className="plant-image" src={plant.img} alt={plant.name} />
             <div className="plant-details">
@@ -37,3 +66,5 @@ export default class PlantList extends Component {
     );
   }
 }
+
+export default PlantList;
